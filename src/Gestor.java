@@ -2,7 +2,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 
 class Gestor {
-    private List<Produto> produtos;
+    private List<ProdutoInterface> produtos;
     private List<Venda> vendas;
     private List<Cliente> clientes;
     private Scanner scanner;
@@ -91,7 +91,7 @@ class Gestor {
         if (produtos.isEmpty()) {
             System.out.println("Nenhum produto cadastrado.");
         } else {
-            for (Produto p : produtos) {
+            for (ProdutoInterface p : produtos) {
                 System.out.println(p);
             }
         }
@@ -124,7 +124,7 @@ class Gestor {
         System.out.print("Digite o código do produto a editar: ");
         String codigo = scanner.nextLine();
 
-        for (Produto p : produtos) {
+        for (ProdutoInterface p : produtos) {
             if (p.getCodigo().equals(codigo)) {
                 System.out.print("Novo nome (" + p.getNome() + "): ");
                 String nome = scanner.nextLine();
@@ -155,11 +155,9 @@ class Gestor {
         System.out.print("Digite o código do produto a excluir: ");
         String codigo = scanner.nextLine();
 
-        Iterator<Produto> iterator = produtos.iterator();
-        while (iterator.hasNext()) {
-            Produto p = iterator.next();
-            if (p.getCodigo().equals(codigo)) {
-                iterator.remove();
+        for (int i = 0; i < produtos.size(); i++) {
+            if (produtos.get(i).getCodigo().equals(codigo)) {
+                produtos.remove(i);
                 System.out.println("Produto removido com sucesso!");
                 return;
             }
@@ -199,8 +197,8 @@ class Gestor {
         if (vendas.isEmpty()) {
             System.out.println("Nenhuma venda registrada.");
         } else {
-            for (Venda v : vendas) {
-                System.out.println(v);
+            for (int i = 0; i < vendas.size(); i++) {
+                System.out.printf("%d. %s%n", i+1, vendas.get(i));
             }
         }
     }
@@ -240,8 +238,8 @@ class Gestor {
             if (codigo.equals("0")) {
                 continuar = false;
             } else {
-                Produto produtoSelecionado = null;
-                for (Produto p : produtos) {
+                ProdutoInterface produtoSelecionado = null;
+                for (ProdutoInterface p : produtos) {
                     if (p.getCodigo().equals(codigo)) {
                         produtoSelecionado = p;
                         break;
@@ -254,7 +252,7 @@ class Gestor {
                     scanner.nextLine();
 
                     if (quantidade <= produtoSelecionado.getQuantidade()) {
-                        itens.add(new ItemVenda(produtoSelecionado, quantidade));
+                        itens.add(new ItemVenda((Produto) produtoSelecionado, quantidade));
                         produtoSelecionado.setQuantidade(produtoSelecionado.getQuantidade() - quantidade);
                         System.out.println("Produto adicionado à venda.");
                     } else {
@@ -270,7 +268,12 @@ class Gestor {
             Venda novaVenda = new Venda(clienteVenda, itens);
             vendas.add(novaVenda);
             System.out.println("\nVenda registrada com sucesso!");
+            System.out.println("Resumo da Venda:");
             System.out.println(novaVenda);
+            System.out.println("Itens:");
+            for (ItemVenda item : novaVenda.getItens()) {
+                System.out.println("  " + item);
+            }
         } else {
             System.out.println("Venda cancelada - nenhum produto selecionado.");
         }
@@ -391,11 +394,9 @@ class Gestor {
         System.out.print("Digite o CPF do cliente a excluir: ");
         String cpf = scanner.nextLine();
 
-        Iterator<Cliente> iterator = clientes.iterator();
-        while (iterator.hasNext()) {
-            Cliente c = iterator.next();
-            if (c.getCpf().equals(cpf)) {
-                iterator.remove();
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getCpf().equals(cpf)) {
+                clientes.remove(i);
                 System.out.println("Cliente removido com sucesso!");
                 return;
             }

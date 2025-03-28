@@ -11,6 +11,19 @@ class ItemVenda {
         return produto.getPreco() * quantidade;
     }
 
-    public Produto getProduto() { return produto; }
-    public int getQuantidade() { return quantidade; }
+    public Produto getProduto() {
+        return produto;
+    }
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s x%d - R$%.2f (Subtotal: R$%.2f)",
+                produto.getNome(),
+                quantidade,
+                produto.getPreco(),
+                getSubtotal());
+    }
 }

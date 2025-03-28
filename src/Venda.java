@@ -17,21 +17,32 @@ class Venda {
     }
 
     public void calcularTotal() {
-        double soma = 0.0;
-        for (ItemVenda item : itens) {
-            soma += item.getSubtotal();
+        this.total = 0.0;
+        if (itens != null) {
+            for (ItemVenda item : itens) {
+                if (item != null && item.getProduto() != null) {  // Verifica nulos
+                    this.total += item.getSubtotal();
+                }
+            }
         }
-        this.total = soma;
     }
 
     @Override
     public String toString() {
-        return String.format("Venda #%s - %s - %s - R$%.2f",
+        return String.format("Venda #%d - Cliente: %s - Total: R$%.2f",
                 id, cliente.getNome(), total);
     }
 
-    public int getId() { return id; }
-    public Cliente getCliente() { return cliente; }
-    public List<ItemVenda> getItens() { return itens; }
-    public double getTotal() { return total; }
+    public int getId() {
+        return id;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+    public double getTotal() {
+        return total;
+    }
 }
