@@ -280,13 +280,12 @@ class Gestor {
         System.out.println("\n=== DETALHES DE VENDA ===");
         listarVendas();
         System.out.print("Digite o ID da venda: ");
-        String id = scanner.nextLine();
+        int id = scanner.nextInt();
 
         for (Venda v : vendas) {
-            if (v.getId().equals(id)) {
+            if (v.getId() == id) {
                 System.out.println("\n=== DETALHES ===");
                 System.out.println("Cliente: " + v.getCliente().getNome());
-                System.out.println("Data: " + v.getDataFormatada());
                 System.out.println("\nItens:");
                 for (ItemVenda item : v.getItens()) {
                     System.out.printf("%s x%d - R$%.2f\n",
@@ -405,116 +404,8 @@ class Gestor {
     }
 }
 
-class Produto {
-    private String codigo;
-    private String nome;
-    private double preco;
-    private int quantidade;
-    private String categoria;
 
-    public Produto(String codigo, String nome, double preco, int quantidade, String tamanho, String categoria) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.categoria = categoria;
-    }
 
-    @Override
-    public String toString() {
-        return String.format("%s - %s (Tamanho: %s) - R$%.2f - %d disponíveis - %s",
-                codigo, nome, preco, quantidade, categoria);
-    }
 
-    public String getCodigo() { return codigo; }
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
-    public double getPreco() { return preco; }
-    public void setPreco(double preco) { this.preco = preco; }
-    public int getQuantidade() { return quantidade; }
-    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
-    public String getCategoria() { return categoria; }
-    public void setCategoria(String categoria) { this.categoria = categoria; }
-}
 
-class Venda {
-    private String id;
-    private Cliente cliente;
-    private List<ItemVenda> itens;
-    private double total;
-    private Date data;
 
-    public Venda(Cliente cliente, List<ItemVenda> itens) {
-        this.id = UUID.randomUUID().toString().substring(0, 8);
-        this.cliente = cliente;
-        this.itens = new ArrayList<>(itens);
-        this.data = new Date();
-        calcularTotal();
-    }
-
-    public void calcularTotal() {
-        this.total = itens.stream()
-                .mapToDouble(ItemVenda::getSubtotal)
-                .sum();
-    }
-
-    public String getDataFormatada() {
-        return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(data);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Venda #%s - %s - %s - R$%.2f",
-                id, cliente.getNome(), getDataFormatada(), total);
-    }
-
-    public String getId() { return id; }
-    public Cliente getCliente() { return cliente; }
-    public List<ItemVenda> getItens() { return itens; }
-    public double getTotal() { return total; }
-    public Date getData() { return data; }
-}
-
-class ItemVenda {
-    private Produto produto;
-    private int quantidade;
-
-    public ItemVenda(Produto produto, int quantidade) {
-        this.produto = produto;
-        this.quantidade = quantidade;
-    }
-
-    public double getSubtotal() {
-        return produto.getPreco() * quantidade;
-    }
-
-    public Produto getProduto() { return produto; }
-    public int getQuantidade() { return quantidade; }
-}
-
-class Cliente {
-    private String cpf;
-    private String nome;
-    private String email;
-    private String telefone;
-
-    public Cliente(String cpf, String nome, String email, String telefone) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s - %s - %s - %s", cpf, nome, email, telefone);
-    }
-
-    public String getCpf() { return cpf; }
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getTelefone() { return telefone; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
-}
