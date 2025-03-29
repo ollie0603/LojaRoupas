@@ -5,7 +5,7 @@ class Produto implements ProdutoInterface {
     private int quantidade;
     private String categoria;
 
-    public Produto(String codigo, String nome, double preco, int quantidade, String tamanho, String categoria) {
+    public Produto(String codigo, String nome, double preco, int quantidade, String categoria) {
         this.codigo = codigo;
         this.nome = nome;
         this.preco = preco;
@@ -68,4 +68,5 @@ class Produto implements ProdutoInterface {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
 }

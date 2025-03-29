@@ -1,5 +1,4 @@
 import java.util.*;
-import java.text.SimpleDateFormat;
 
 class Gestor {
     private List<ProdutoInterface> produtos;
@@ -19,8 +18,8 @@ class Gestor {
         this.scanner = new Scanner(System.in);
 
         clientes.add(new Cliente("123.456.789-00", "João Silva", "joao@email.com", "11999998888"));
-        produtos.add(new Produto("P001", "Camiseta Branca", 49.90, 10, "M", "Camisetas"));
-        produtos.add(new Produto("P002", "Calça Jeans", 129.90, 5, "42", "Calças"));
+        produtos.add(new Produto("P001", "Camiseta Branca", 49.90, 10, "Camisetas"));
+        produtos.add(new Produto("P002", "Calça Jeans", 129.90, 5, "Calças"));
     }
 
     public void menuPrincipal() {
@@ -108,12 +107,10 @@ class Gestor {
         System.out.print("Quantidade: ");
         int quantidade = scanner.nextInt();
         scanner.nextLine();
-        System.out.print("Tamanho: ");
-        String tamanho = scanner.nextLine();
         System.out.print("Categoria: ");
         String categoria = scanner.nextLine();
 
-        Produto novoProduto = new Produto(codigo, nome, preco, quantidade, tamanho, categoria);
+        ProdutoInterface novoProduto = new Produto(codigo, nome, preco, quantidade, categoria);
         produtos.add(novoProduto);
         System.out.println("Produto cadastrado com sucesso!");
     }
@@ -252,7 +249,7 @@ class Gestor {
                     scanner.nextLine();
 
                     if (quantidade <= produtoSelecionado.getQuantidade()) {
-                        itens.add(new ItemVenda((Produto) produtoSelecionado, quantidade));
+                        itens.add(new ItemVenda(produtoSelecionado, quantidade));
                         produtoSelecionado.setQuantidade(produtoSelecionado.getQuantidade() - quantidade);
                         System.out.println("Produto adicionado à venda.");
                     } else {
