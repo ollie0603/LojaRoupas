@@ -1,4 +1,4 @@
-public interface ProdutoInterface {
+public interface GerenteProduto {
     String getCodigo();
     String getNome();
     double getPreco();

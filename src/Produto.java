@@ -1,4 +1,4 @@
-class Produto implements ProdutoInterface {
+class Produto implements GerenteProduto {
     private String codigo;
     private String nome;
     private double preco;

@@ -1,8 +1,8 @@
 class ItemVenda {
-    private ProdutoInterface produto;
+    private GerenteProduto produto;
     private int quantidade;
 
-    public ItemVenda(ProdutoInterface produto, int quantidade) {
+    public ItemVenda(GerenteProduto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
     }
@@ -11,7 +11,7 @@ class ItemVenda {
         return produto.getPreco() * quantidade;
     }
 
-    public ProdutoInterface getProduto() {
+    public GerenteProduto getProduto() {
         return produto;
     }
     public int getQuantidade() {

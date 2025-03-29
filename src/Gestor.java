@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Gestor {
-    private List<ProdutoInterface> produtos;
+    private List<GerenteProduto> produtos;
     private List<Venda> vendas;
     private List<Cliente> clientes;
     private Scanner scanner;
@@ -90,7 +90,7 @@ class Gestor {
         if (produtos.isEmpty()) {
             System.out.println("Nenhum produto cadastrado.");
         } else {
-            for (ProdutoInterface p : produtos) {
+            for (GerenteProduto p : produtos) {
                 System.out.println(p);
             }
         }
@@ -110,7 +110,7 @@ class Gestor {
         System.out.print("Categoria: ");
         String categoria = scanner.nextLine();
 
-        ProdutoInterface novoProduto = new Produto(codigo, nome, preco, quantidade, categoria);
+        GerenteProduto novoProduto = new Produto(codigo, nome, preco, quantidade, categoria);
         produtos.add(novoProduto);
         System.out.println("Produto cadastrado com sucesso!");
     }
@@ -121,7 +121,7 @@ class Gestor {
         System.out.print("Digite o código do produto a editar: ");
         String codigo = scanner.nextLine();
 
-        for (ProdutoInterface p : produtos) {
+        for (GerenteProduto p : produtos) {
             if (p.getCodigo().equals(codigo)) {
                 System.out.print("Novo nome (" + p.getNome() + "): ");
                 String nome = scanner.nextLine();
@@ -235,8 +235,8 @@ class Gestor {
             if (codigo.equals("0")) {
                 continuar = false;
             } else {
-                ProdutoInterface produtoSelecionado = null;
-                for (ProdutoInterface p : produtos) {
+                GerenteProduto produtoSelecionado = null;
+                for (GerenteProduto p : produtos) {
                     if (p.getCodigo().equals(codigo)) {
                         produtoSelecionado = p;
                         break;
