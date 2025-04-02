@@ -1,17 +1,17 @@
 import java.util.*;
 
-class Gestor {
+class Gestão {
     private List<GerenteProduto> produtos;
     private List<Venda> vendas;
     private List<Cliente> clientes;
     private Scanner scanner;
 
     public static void main(String[] args) {
-        Gestor gestor = new Gestor();
-        gestor.menuPrincipal();
+        Gestão gestão = new Gestão();
+        gestão.menuPrincipal();
     }
 
-    public Gestor() {
+    public Gestão() {
         this.produtos = new ArrayList<>();
         this.vendas = new ArrayList<>();
         this.clientes = new ArrayList<>();
